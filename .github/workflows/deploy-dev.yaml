@@ -43,7 +43,7 @@ jobs:
         uses: act10ns/slack@v2
         with:
           status: ${{job.status}}
-          message: "New Preview Version available from CDK-Food Hub\nPreview URL : {{env.PREVIEW_URL}}"
+          message: "New Preview Version available from UWU Hostal Management System\nPreview URL : {{env.PREVIEW_URL}}"
         if: always()
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
