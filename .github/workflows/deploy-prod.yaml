@@ -1,0 +1,45 @@
+name: Vercel Production Deployment
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts
+        run: |
+          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+          echo "PRODUCTION_URL=$(cat deployment-url.txt)" >> "$GITHUB_ENV"
+        shell: bash
+
+      - name: Print Inspect and Preview URLs
+        run: |
+          echo Production url : $PRODUCTION_URL
+
+      - name: Notify Slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{job.status}}
+          message: "New Production release available from CDK-Food Hub\nProduction URL : {{env.PRODUCTION_URL}}"
+        if: always()
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
