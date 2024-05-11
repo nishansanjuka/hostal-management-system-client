@@ -50,7 +50,7 @@ export default function HeroSection() {
     <section className="relative w-full xl:h-screen  overflow-hidden">
       {!hideSky && (
         <Image
-          style={{ scale: 1.5 - scrollY / 800 }}
+          // style={{ scale: 1.5 - scrollY / 800 }}
           className=" object-cover fixed top-0 left-0"
           src={ImgSky}
           alt="ImgSky"
@@ -76,14 +76,14 @@ export default function HeroSection() {
           </div>
         )}
         <Image
-          style={{ scale: 1 + scrollY / 5000 }}
+          style={{ scale: 1 + scrollY / 10000 }}
           className="object-cover absolute left-0 top-0 right-0 bottom-0"
           src={Ground}
           alt="ImgSky"
         />
         <Image
-          style={{ scale: 1 + scrollY / 2000 }}
-          className="object-cover absolute bottom-0 w-[60%]"
+          style={{ scale: 1 + scrollY / 1000 }}
+          className="object-cover absolute w-[60%] xl:w-[50%] bottom-0 xl:bottom-20"
           src={Students}
           alt="ImgSky"
         />
