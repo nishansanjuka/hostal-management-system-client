@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <Fragment>
       <HeroSection />
-      <div className=" w-full h-screen">
+      <div className=" w-full h-screen hidden sm:block">
         <p className=" p-10">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non earum
           maiores temporibus voluptatum et cupiditate placeat a minima? Quas
@@ -121,6 +121,7 @@ export default function Home() {
           laudantium quas?
         </p>
       </div>
+      <div className=" block sm:hidden">not supports yet on mobile devices</div>
     </Fragment>
   );
 }
