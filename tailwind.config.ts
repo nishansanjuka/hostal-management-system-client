@@ -19,6 +19,12 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        "3xl": "2000px", // Add 3xl breakpoint for 2K screens
+      },
+      maxWidth: {
+        "2560": "2560px",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
