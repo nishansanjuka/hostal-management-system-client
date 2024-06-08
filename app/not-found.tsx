@@ -28,12 +28,15 @@ export default function NotFound() {
 
         <div className=" flex items-center space-x-4 justify-center">
           <div className="mt-10 flex justify-center">
-            <a href="/" className="text-sm font-semibold leading-7 text-white">
+            <button
+              onClick={() => router.back()}
+              className="text-sm font-semibold leading-7 text-white"
+            >
               <span aria-hidden="true">&larr;</span> Go back
-            </a>
+            </button>
           </div>
           <div className="mt-10 flex justify-center">
-            <Button onClick={() => router.back()} variant={"default"}>
+            <Button onClick={() => router.push("/")} variant={"default"}>
               Home
             </Button>
           </div>

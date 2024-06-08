@@ -51,7 +51,7 @@
 
 .c-fade-in {
   opacity: 0;
-  animation: fade-in 100ms 500ms forwards;
+  animation: fade-in 500ms forwards;
 }
 
 @keyframes fade-in {
