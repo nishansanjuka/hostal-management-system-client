@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { steps } from "@/data";
 import { cn } from "@/lib/utils";
-import { Step } from "@/types/steps";
+import { Step } from "@/types";
 import { FC, useEffect, useRef } from "react";
 
 export const StepsSection: FC = () => {
