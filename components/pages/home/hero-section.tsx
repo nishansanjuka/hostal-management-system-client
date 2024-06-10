@@ -28,10 +28,10 @@ export const HeroSection: FC = () => {
   const [IntTop, setIntTop] = useState<boolean>(false);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "instant",
-    });
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: "instant",
+    // });
     function handleHeroSection() {
       setScrollY(window.scrollY);
       if (studentsElement.current && panelElement.current) {

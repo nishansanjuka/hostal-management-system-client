@@ -91,7 +91,7 @@ export const MapDrawer: FC = () => {
   }, []);
 
   return (
-    <section ref={mapContainer} className=" w-full h-full mt-20">
+    <section ref={mapContainer} className=" w-full h-full mt-20 ">
       <header className=" w-full h-fit flex flex-col mb-10 space-y-1 justify-center items-center">
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Sample Text
@@ -102,7 +102,7 @@ export const MapDrawer: FC = () => {
         </p>
       </header>
 
-      <div className=" relative w-full lg:w-fit mx-auto overflow-x-hidden lg:rounded-2xl lg:aspect-[16/6] max-h-[1440px] overflow-hidden ">
+      <div className=" relative w-full lg:w-fit mx-auto overflow-x-hidden lg:rounded-2xl lg:aspect-[16/6] max-h-[1440px] overflow-hidden max-w-2560">
         <section className=" w-full h-full">
           <div id="map" tabIndex={10} className=" w-full h-full "></div>
         </section>
