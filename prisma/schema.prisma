@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   Int                   @id @default(autoincrement())
+  clerkId              String                @unique
+  username             String
+  email                String                @unique
+  phoneNumber          String?
+  role                 Role                  @default(STANDARD_USER)
+  student              Student?
+  privateBoardingOwner PrivateBoardingOwner?
+  Warden               Warden?
+}
+
+enum Role {
+  ADMIN
+  STANDARD_USER
+  WARDEN
+}
+
+model Student {
+  studentId                String            @id @default(uuid())
+  user                     User              @relation(fields: [userId], references: [id] , onDelete: Cascade)
+  userId                   Int               @unique
+  room                     Room?             @relation(fields: [roomId], references: [id] , onDelete: Cascade)
+  roomId                   Int?
+  exchangeRequestsFromUser ExchangeRequest[] @relation("FromUser")
+  exchangeRequestsToUser   ExchangeRequest[] @relation("ToUser")
+}
+
+model PrivateBoardingOwner {
+  id               Int               @id @default(autoincrement())
+  user             User              @relation(fields: [userId], references: [id] , onDelete: Cascade)
+  userId           Int               @unique
+  privateBoardings PrivateBoarding[]
+}
+
+model Warden {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id] , onDelete: Cascade)
+  userId Int  @unique
+}
+
+model Hostel {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  genderType GenderType
+  distance   Float
+  location   String?    @default("Not specified")
+  year       Year
+  rooms      Room[]
+}
+
+enum GenderType {
+  MALE
+  FEMALE
+  MIXED
+}
+
+enum Year {
+  FIRST
+  SECOND
+  THIRD
+  FOURTH
+}
+
+model Room {
+  id       Int       @id @default(autoincrement())
+  capacity Int       @default(2)
+  beds     Int
+  hostel   Hostel    @relation(fields: [hostelId], references: [id] , onDelete: Cascade)
+  hostelId Int
+  students Student[]
+}
+
+model ExchangeRequest {
+  id         Int           @id @default(autoincrement())
+  status     RequestStatus @default(PENDING)
+  fromUser   Student       @relation("FromUser", fields: [fromUserId], references: [studentId] , onDelete: Cascade)
+  fromUserId String
+  toUser     Student?      @relation("ToUser", fields: [toUserId], references: [studentId] , onDelete: Cascade)
+  toUserId   String?
+}
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model PrivateBoarding {
+  id            Int                  @id @default(autoincrement())
+  name          String
+  location      String               @default("Not specified")
+  distance      Float
+  owner         PrivateBoardingOwner @relation(fields: [ownerId], references: [id] , onDelete: Cascade)
+  ownerId       Int
+  description   String
+  boardingRooms BoardingRoom[]
+}
+
+model BoardingRoom {
+  id          Int             @id @default(autoincrement())
+  capacity    Int
+  facilities  String
+  boarding    PrivateBoarding @relation(fields: [boardingId], references: [id] , onDelete: Cascade)
+  boardingId  Int
+  rent        Float
+  description String
+}

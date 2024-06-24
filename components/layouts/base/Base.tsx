@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { NavigationBar } from "./ui";
-import { Provider } from "@/providers/provider";
+import { Provider } from "@/providers/base-provider";
 import { FooterSection } from "./footer";
 
 export const BaseContent: FC<PropsWithChildren> = ({ children }) => {

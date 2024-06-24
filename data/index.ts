@@ -1,3 +1,3 @@
-export * from "./navigationRoutesData";
+export * from "./base-routes";
 export * from "./stepsData";
 export * from "./feedbackData";

@@ -8,7 +8,7 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <main className="isolate min-h-screen w-full fixed z-50 bg-background max-w-2560">
+    <main className="isolate top-0 z-[200] overflow-hidden min-h-screen w-full fixed bg-background max-w-2560">
       <Image
         src={Img}
         width={1920}
