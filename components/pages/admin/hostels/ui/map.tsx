@@ -7,7 +7,7 @@ import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import "ol/ol.css";
 import VectorLayer from "ol/layer/Vector";
-import { Feature, Overlay } from "ol";
+import { Feature } from "ol";
 import { Point } from "ol/geom";
 import VectorSource from "ol/source/Vector";
 import Style from "ol/style/Style";
@@ -16,7 +16,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Coordinate } from "ol/coordinate";
 import Text from "ol/style/Text";
 import Fill from "ol/style/Fill";
-import { LampFloor } from "lucide-react";
 
 export const MapDrawer: FC<{
   setLocation: React.Dispatch<React.SetStateAction<Coordinate | undefined>>;

@@ -7,17 +7,34 @@ import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import "ol/ol.css";
 import VectorLayer from "ol/layer/Vector";
-import { Feature } from "ol";
+import { Feature, Overlay } from "ol";
 import { Point } from "ol/geom";
 import VectorSource from "ol/source/Vector";
 import Style from "ol/style/Style";
 import Icon from "ol/style/Icon";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ExtHostel, useHostels } from "@/hooks/client/hostels";
+import Text from "ol/style/Text";
+import Fill from "ol/style/Fill";
+import { OGCMapTile } from "ol/source";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const MapDrawer: FC = () => {
   const mapContainer = useRef<HTMLHeadingElement>(null);
-  const mapElement = useRef<HTMLDivElement>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [selectedHostel, setSelectedHostel] = useState<ExtHostel | null>(null);
+
+  const { hostels } = useHostels();
 
   useEffect(() => {
     const initialCoordinates = [9025483.996372394, 779238.512212571];
@@ -33,6 +50,52 @@ export const MapDrawer: FC = () => {
         }),
       ],
       target: "map",
+    });
+
+    hostels.map((hostel) => {
+      if (hostel.location) {
+        const { cords } = JSON.parse(atob(hostel.location)) as {
+          location: string;
+          cords: number[];
+        };
+
+        if (cords) {
+          const pitLamp = new VectorLayer({
+            source: new VectorSource({
+              features: [
+                new Feature({
+                  id: hostel.id,
+                  name: hostel.name,
+                  geometry: new Point(cords),
+                }),
+              ],
+            }),
+            style: new Style({
+              image: new Icon({
+                src: "/assets/hostal.png",
+                scale: 0.3,
+              }),
+              text: new Text({
+                text: hostel.name,
+                font: "12px inter",
+                textAlign: "center",
+                scale: 0.8,
+                fill: new Fill({
+                  color: "white",
+                }),
+                backgroundFill: new Fill({
+                  color: "green",
+                }),
+                padding: [5, 5, 5, 5],
+                offsetX: 0,
+                offsetY: 30,
+              }),
+            }),
+          });
+
+          map.addLayer(pitLamp);
+        }
+      }
     });
 
     function arrangeMap() {
@@ -74,12 +137,28 @@ export const MapDrawer: FC = () => {
     map.addLayer(vectorLayer);
 
     map.on("click", function (evt) {
-      const coordinate = evt.coordinate;
-      console.log("Map clicked at:", coordinate);
+      const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+        return feature;
+      });
+
+      if (feature && feature.get("id")) {
+        const selected = hostels.find(
+          (hostel) => hostel.id === feature.get("id")
+        );
+        if (selected) setSelectedHostel(selected);
+        setOpen(true);
+      }
     });
 
     map.on("loadend", () => {
       setIsMapLoaded(true);
+    });
+
+    map.on("pointermove", function (e) {
+      const pixel = map.getEventPixel(e.originalEvent);
+      const hit = map.hasFeatureAtPixel(pixel);
+
+      map.getTargetElement().style.cursor = hit ? "pointer" : "";
     });
 
     window.addEventListener("resize", onResizing);
@@ -88,7 +167,7 @@ export const MapDrawer: FC = () => {
       window.removeEventListener("resize", onResizing);
       map.setTarget(undefined);
     };
-  }, []);
+  }, [hostels]);
 
   return (
     <section ref={mapContainer} className=" w-full h-full mt-20 ">
@@ -104,7 +183,31 @@ export const MapDrawer: FC = () => {
 
       <div className=" relative w-full lg:w-fit mx-auto overflow-x-hidden lg:rounded-2xl lg:aspect-[16/6] max-h-[1440px] overflow-hidden max-w-2560">
         <section className=" w-full h-full">
-          <div id="map" tabIndex={10} className=" w-full h-full "></div>
+          <div id="map" tabIndex={10} className=" w-full h-full ">
+            {selectedHostel && (
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent className=" max-w-fit">
+                  <DialogHeader>
+                    <DialogTitle>{selectedHostel.name}</DialogTitle>
+                    <DialogDescription>
+                      {
+                        JSON.parse(atob(selectedHostel.location as string))[
+                          "location"
+                        ]
+                      }
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <Button variant={'ghost'} className=" bg-green-700 text-white hover:bg-green-600 hover:text-white">
+                      <Link href={"#"}>
+                        Go checkout this hostel details here
+                      </Link>
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            )}
+          </div>
         </section>
         {!isMapLoaded && (
           <section className="absolute top-0 left-0 bg-slate-200 w-full h-full">

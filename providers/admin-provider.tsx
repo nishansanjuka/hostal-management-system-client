@@ -5,9 +5,9 @@ import { HostlersProvider } from "./hostlers-provider";
 export const AdminProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <HostlersProvider>
+      {/* <HostlersProvider> */}
         <HostelsProvider>{children}</HostelsProvider>
-      </HostlersProvider>
+      {/* </HostlersProvider> */}
     </>
   );
 };

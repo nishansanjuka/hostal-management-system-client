@@ -2,7 +2,7 @@ import { FC } from "react";
 
 export const AboutSection: FC = () => {
   return (
-    <section className=" bg-slate-50 mt-20 w-full h-full text-center min-h-screen 3xl:min-h-fit flex flex-col justify-center ">
+    <section className="  mt-20 w-full h-full text-center min-h-fit my-40 3xl:min-h-fit flex flex-col justify-center ">
       <header className=" w-full h-fit flex flex-col mb-10 space-y-1 justify-center items-center">
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Sample Text
