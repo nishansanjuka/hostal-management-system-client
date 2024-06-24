@@ -6,7 +6,9 @@ export const AdminProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       {/* <HostlersProvider> */}
-        <HostelsProvider>{children}</HostelsProvider>
+      {/* <HostelsProvider> */}
+      {children}
+      {/* </HostelsProvider> */}
       {/* </HostlersProvider> */}
     </>
   );
