@@ -1,9 +1,25 @@
 "use client";
 import { HostlerContext } from "@/providers/hostlers-provider";
-import { Student } from "@prisma/client";
+import { ExchangeRequest, Hostel, Room, Student, User } from "@prisma/client";
 import { useContext, useState } from "react";
 
-export interface ExtHostler extends Student {}
+interface ExRoom extends Room {
+  hostel: Hostel;
+}
+
+interface ExStudent extends Student {
+  room: ExRoom;
+}
+
+interface ExtUser extends User {
+  student: ExStudent;
+}
+
+export interface ExtHostler extends Student {
+  exchangeRequestsFromUser?: ExchangeRequest[];
+  exchangeRequestsToUser?: ExchangeRequest[];
+  user?: ExtUser;
+}
 
 export const HostlersContext = () => {
   const [hostlers, setHostlers] = useState<ExtHostler[]>([]);
@@ -22,8 +38,8 @@ export const HostlersContext = () => {
     );
   };
 
-  const addHostler = (newHostel: ExtHostler) => {
-    setHostlers((prevhostlers) => [...prevhostlers, newHostel]);
+  const addHostler = (newHostler: ExtHostler) => {
+    setHostlers((prevhostlers) => [...prevhostlers, newHostler]);
   };
 
   return {
@@ -38,7 +54,9 @@ export const HostlersContext = () => {
 export const useHostlers = () => {
   const context = useContext(HostlerContext);
   if (!context) {
-    throw new Error("useHostlerContext must be used within an HostlersProvider");
+    throw new Error(
+      "useHostlerContext must be used within an HostlersProvider"
+    );
   }
   return context;
 };

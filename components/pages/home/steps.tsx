@@ -14,10 +14,10 @@ export const StepsSection: FC = () => {
         const children = stepsContainer.current
           .childNodes as NodeListOf<HTMLDivElement>;
 
-        children.forEach((child, index) => {
+        children.forEach((child) => {
           if (
             window.innerHeight - child.getBoundingClientRect().top >
-            window.innerHeight * (30 / 100)
+            window.innerHeight * (50 / 100)
           ) {
             child.style.backgroundColor = "hsl(141, 79%, 85%)";
             child.style.color = "hsl(142, 72%, 29%)";
@@ -37,12 +37,12 @@ export const StepsSection: FC = () => {
   }, []);
 
   return (
-    <section className="w-full h-full min-h-screen 3xl:min-h-fit mt-20">
+    <section className="w-full h-full min-h-screen 3xl:min-h-fit mt-20 px-2 sm:px-0">
       <header className=" w-full h-fit flex flex-col mb-10 space-y-1 justify-center items-center">
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Sample Text
         </h1>
-        <p className=" text-muted-foreground text-xs font-semibold">
+        <p className=" px-4 sm:px-0 text-center text-muted-foreground text-xs font-semibold">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
           incidunt.
         </p>
@@ -50,7 +50,7 @@ export const StepsSection: FC = () => {
 
       <section
         ref={stepsContainer}
-        className=" w-[80%] lg:w-[60%] mx-auto flex flex-col space-y-10"
+        className=" sm:w-[80%] lg:w-[60%] mx-auto flex flex-col space-y-10"
       >
         {steps.map((step, index) => (
           <StepGuide
@@ -85,12 +85,12 @@ const StepGuide: FC<{ step: Step; className: string }> = ({
   return (
     <div
       className={cn(
-        " w-[50%] px-10 py-5 flex items-center rounded-full space-x-5 transition-colors duration-500",
+        " w-[50%] px-10 py-5 flex sm:items-center rounded-2xl sm:rounded-full space-x-5 transition-colors duration-500",
         className
       )}
     >
-      <p className="flex-1 text-left line-clamp-2">{description}</p>
-      <h1 className=" text-5xl font-extrabold">{step}</h1>
+      <p className="flex-1 text-left sm:line-clamp-2">{description}</p>
+      <h1 className=" sm:text-5xl font-extrabold">{step}</h1>
     </div>
   );
 };

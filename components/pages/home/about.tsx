@@ -7,7 +7,7 @@ export const AboutSection: FC = () => {
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Sample Text
         </h1>
-        <p className=" text-muted-foreground text-xs font-semibold">
+        <p className=" text-center px-2 text-muted-foreground text-xs font-semibold">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
           incidunt.
         </p>
@@ -29,7 +29,7 @@ export const AboutSection: FC = () => {
           perspiciatis modi.
         </p>
 
-        <p className="w-[65vw] mx-auto max-w-2560">
+        <p className="sm:w-[65vw] w-[80vw] mx-auto max-w-2560">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia
           eius neque vel reiciendis! Eveniet cum consequatur blanditiis debitis
           quasi ullam ratione est impedit odit animi quos, deleniti quibusdam
@@ -44,7 +44,7 @@ export const AboutSection: FC = () => {
           perspiciatis modi.
         </p>
 
-        <p className="w-[75vw] mx-auto max-w-2560">
+        <p className="sm:w-[75vw] w-[80vw] mx-auto max-w-2560">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia
           eius neque vel reiciendis! Eveniet cum consequatur blanditiis debitis
           quasi ullam ratione est impedit odit animi quos, deleniti quibusdam

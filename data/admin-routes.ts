@@ -13,12 +13,12 @@ export const AdminRoutes : AdminRoute[]= [
     },
     {
         name : 'Swap Requests',
-        href : '/admin/dashboard/swap',
+        href : '/admin/dashboard/swap-requests',
         icon : 'Replace'
     },
-    {
-        name : 'Applications',
-        href : '/admin/dashboard/applications',
-        icon : 'GitPullRequestCreateArrow'
-    }
+    // {
+    //     name : 'Applications',
+    //     href : '/admin/dashboard/applications',
+    //     icon : 'GitPullRequestCreateArrow'
+    // }
 ]

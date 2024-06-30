@@ -18,7 +18,7 @@ interface RoomBody extends Pick<Room, "beds" | "capacity"> {
   roomsPerUnit: number;
 }
 
-export const AddRoom: FC<{ hostelId: number; name: string; }> = ({
+export const AddRoom: FC<{ hostelId: number; name: string }> = ({
   hostelId,
   name,
 }) => {
@@ -26,6 +26,7 @@ export const AddRoom: FC<{ hostelId: number; name: string; }> = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<RoomBody>();
 
   const { updateHostelById } = useHostels();
@@ -45,6 +46,7 @@ export const AddRoom: FC<{ hostelId: number; name: string; }> = ({
     const res = await createRooms(rooms);
     updateHostelById(hostelId, res);
     setLoad(false);
+    reset();
   };
 
   return (

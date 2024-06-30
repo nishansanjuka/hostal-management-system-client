@@ -9,13 +9,13 @@ export const FeedBackSection: FC = () => {
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Sample Text
         </h1>
-        <p className=" text-muted-foreground text-xs font-semibold">
+        <p className=" text-center px-4 text-muted-foreground text-xs font-semibold">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
           incidunt.
         </p>
       </header>
 
-      <section className=" lg:max-w-[70%] mx-auto flex justify-center">
+      <section className=" max-w-[90vw] lg:max-w-[70%] mx-auto flex justify-center">
         <FeedBackCard />
       </section>
     </section>

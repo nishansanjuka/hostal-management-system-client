@@ -7,6 +7,7 @@ import buildings from "@/public/assets/buildings.png";
 import students from "@/public/assets/students.png";
 import blurBg from "@/public/assets/blurbg.png";
 import { FilterPanel } from "./ui/panel";
+import { useMediaQuery } from "react-responsive";
 
 export const HeroSection: FC = () => {
   const [hidePanel, setHidePanel] = useState<boolean>(false);
@@ -16,6 +17,7 @@ export const HeroSection: FC = () => {
   const [scrollY, setScrollY] = useState<number>(0);
   const [devicePixelRatio, setDevicePixelRatio] = useState<number>(0);
   const [IntTop, setIntTop] = useState<boolean>(false);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   useEffect(() => {
     // window.scrollTo({
@@ -69,7 +71,7 @@ export const HeroSection: FC = () => {
   }, []);
 
   return (
-    <section className="relative aspect-video max-h-screen w-full c-fade-in">
+    <section className=" hidden sm:block relative aspect-video max-h-screen w-full c-fade-in">
       {devicePixelRatio > 0 && IntTop ? (
         <div className=" absolute from-popover top-0 left-0 right-0 bottom-0">
           <div className=" relative w-full max-h-full h-full">

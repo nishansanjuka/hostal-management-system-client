@@ -90,35 +90,36 @@ export const NavHeader: FC = () => {
                   <CommandList>
                     <CommandEmpty>No hostel found.</CommandEmpty>
                     <CommandGroup>
-                      {hostels.map((hostel) => (
-                        <CommandItem
-                          key={hostel.name}
-                          value={hostel.name}
-                          onSelect={async (currentname) => {
-                            sethostelValue(
-                              currentname === hostelValue ? "" : currentname
-                            );
-                            setopenHostels(false);
-                            setRefresh(true);
-                            setAllHostlers(
-                              await getHostlerForHostel({
-                                id: hostel.id,
-                              })
-                            );
-                            setRefresh(false);
-                          }}
-                        >
-                          <Check
-                            className={cn(
-                              "mr-2 h-4 w-4",
-                              hostelValue === hostel.name
-                                ? "opacity-100"
-                                : "opacity-0"
-                            )}
-                          />
-                          {hostel.name}
-                        </CommandItem>
-                      ))}
+                      {hostels.length > 0 &&
+                        hostels.map((hostel) => (
+                          <CommandItem
+                            key={hostel.name}
+                            value={hostel.name}
+                            onSelect={async (currentname) => {
+                              sethostelValue(
+                                currentname === hostelValue ? "" : currentname
+                              );
+                              setopenHostels(false);
+                              setRefresh(true);
+                              setAllHostlers(
+                                await getHostlerForHostel({
+                                  id: hostel.id,
+                                })
+                              );
+                              setRefresh(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                hostelValue === hostel.name
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {hostel.name}
+                          </CommandItem>
+                        ))}
                     </CommandGroup>
                   </CommandList>
                 </Command>

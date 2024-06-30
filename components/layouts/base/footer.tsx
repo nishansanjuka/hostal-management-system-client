@@ -1,17 +1,40 @@
 "use client";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import logoLight from "@/public/assets/logo-light.svg";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { useHostels } from "@/hooks/client/hostels";
 
 export const FooterSection: FC = () => {
   const pathName = usePathname();
+  const [scrollTop, setScrollTop] = useState<boolean>(false);
+  const { isLoading } = useHostels();
+  useMemo(() => setScrollTop(isLoading), [isLoading]);
+
+  useEffect(() => {
+    const onScrolling = () => {
+      setScrollTop(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", onScrolling);
+
+    return () => {
+      window.removeEventListener("scroll", onScrolling);
+    };
+  }, []);
+
   return (
     <footer
       className={cn(
-        "w-full select-none h-full min-h-fit mt-20 bg-green-700 rounded-t-[60px] p-10 text-xs text-white",
-        ["/sign-in","/admin/dashboard"] ? "hidden" : "block"
+        "w-full select-none h-fit mt-20 bg-green-700 rounded-t-[60px] p-10 text-xs text-white",
+        ["/sign-in", "/hostels", "/swap-hostels", "/me"].includes(pathName) ||
+          pathName.startsWith("/admin")
+          ? "hidden"
+          : "block",
+        // pathName.startsWith("/hostels") && !scrollTop && "absolute bottom-0",
+        // pathName.startsWith("/swap-hostels") &&
+        //   !scrollTop &&
+        //   "absolute bottom-0"
       )}
     >
       <div className=" flex items-center w-full border-b border-b-white">
