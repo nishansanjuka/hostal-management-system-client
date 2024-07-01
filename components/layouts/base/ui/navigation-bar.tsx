@@ -69,7 +69,7 @@ export const NavigationBar: FC = () => {
   }, [isSignedIn, pathName]);
 
   return (
-    <>
+    <div className=" hidden sm:block">
       {isLoaded && (
         <>
           {!isMobile && (
@@ -245,7 +245,7 @@ export const NavigationBar: FC = () => {
                         " absolute right-10 font-extrabold",
                         isHome
                           ? "text-muted-foreground"
-                          : "text-white hover:text-green-600",
+                          : "text-black hover:text-green-600",
                         secondaryNavigation && "text-white hover:text-green-600"
                       )}
                     >
@@ -260,6 +260,6 @@ export const NavigationBar: FC = () => {
           {isMobile && <MobileNavigationBar />}
         </>
       )}
-    </>
+    </div>
   );
 };
