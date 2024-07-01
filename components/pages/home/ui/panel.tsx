@@ -27,11 +27,10 @@ export const FilterPanel: FC<{
             )}
           >
             <h1 className=" text-4xl xl:text-6xl font-bold text-foreground">
-              Sample Text Sample Text
+              Proper Hostels and Proper Studies
             </h1>
             <p className=" text-xs text-muted-foreground font-semibold xl:text-lg">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Veritatis, labore.
+            Go to your future accommodation,in just a few clicks.
             </p>
             <FilterSection redirect />
           </section>
