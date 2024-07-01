@@ -80,9 +80,9 @@ export const NavigationBar: FC = () => {
                     " c-fade-in z-50 flex items-center max-w-2560 h-fit  px-10 py-6 justify-center transition-all duration-500",
                     isHome
                       ? "bg-transparent fixed w-full"
-                      : "bg-green-700 fixed w-full",
+                      : "bg-white fixed w-full",
                     primaryNavigation && "bg-white w-full",
-                    secondaryNavigation && "bg-green-700 w-full",
+                    secondaryNavigation && "bg-white w-full",
                     [
                       "/sign-in",
                       "/admin/dashboard",
@@ -99,8 +99,8 @@ export const NavigationBar: FC = () => {
                       isHome
                         ? !secondaryNavigation
                           ? logoDark
-                          : logoLight
-                        : logoLight
+                          : logoDark
+                        : logoDark
                     }
                     className=" absolute left-10"
                   />
@@ -118,10 +118,10 @@ export const NavigationBar: FC = () => {
                             " select-none",
                             pathName === "/" && "border-b",
                             isHome
-                              ? "hover:text-green-700 hover:border-b-green-700 text-muted-foreground border-muted-foreground"
-                              : "text-white hover:text-green-100 hover:border-b-green-100 border-white",
+                              ? "hover:text-muted-foreground hover:border-b-white text-muted-foreground border-muted-foreground"
+                              : "text-muted-foreground hover:text-muted-foreground hover:border-b-muted-foreground border-muted-foreground",
                             secondaryNavigation &&
-                              "text-white hover:text-green-100 hover:border-b-green-100 border-white"
+                              "text-muted-foreground hover:text-muted-foreground hover:border-b-muted-foreground border-muted-foreground"
                           )}
                         >
                           Home
@@ -132,10 +132,10 @@ export const NavigationBar: FC = () => {
                             " select-none",
                             pathName === "/admin/dashboard" && "border-b",
                             isHome
-                              ? "hover:text-green-700 hover:border-b-green-700 text-muted-foreground border-muted-foreground"
-                              : "text-white hover:text-green-100 hover:border-b-green-100 border-white",
+                              ? "hover:text-muted-foreground hover:border-b-muttext-muted-foreground text-muted-foreground border-muted-foreground"
+                              : "text-muted-foreground hover:text-muted-foreground hover:border-b-muted-foreground border-muted-foreground",
                             secondaryNavigation &&
-                              "text-white hover:text-green-100 hover:border-b-green-100 border-white"
+                              "text-muted-foreground hover:text-muted-foreground hover:border-b-muted-foreground border-muted-foreground"
                           )}
                         >
                           Dashboard
@@ -151,10 +151,10 @@ export const NavigationBar: FC = () => {
                                 " select-none",
                                 pathName === href && "border-b",
                                 isHome
-                                  ? "hover:text-green-700 hover:border-b-green-700 text-muted-foreground border-muted-foreground"
-                                  : "text-white hover:text-green-100 hover:border-b-green-100 border-white",
+                                  ? "hover:text-muted-foreground hover:border-b-muttext-muted-foreground text-muted-foreground border-muted-foreground"
+                                  : "text-muted-foreground hover:text-muted-foreground hover:border-b-muted-foreground border-muted-foreground",
                                 secondaryNavigation &&
-                                  "text-white hover:text-green-100 hover:border-b-green-100 border-white"
+                                  "text-muted-foreground hover:text-muted-foreground hover:border-b-muted-foreground border-muted-foreground"
                               )}
                             >
                               {name}
@@ -168,9 +168,9 @@ export const NavigationBar: FC = () => {
                                   "border-b",
                                 isHome
                                   ? " text-muted-foreground border-muted-foreground"
-                                  : "text-white  border-white",
+                                  : "text-muted-foreground  border-muted-foreground",
                                 secondaryNavigation &&
-                                  "text-white  border-white"
+                                  "text-muted-foreground  border-muted-foreground"
                               )}
                             >
                               {name}
@@ -189,16 +189,16 @@ export const NavigationBar: FC = () => {
                             "text-muted-foreground font-medium text-sm min-w-fit",
                             isHome
                               ? "text-muted-foreground"
-                              : "text-white hover:text-green-600",
+                              : "text-muted-foreground hover:text-slate-600",
                             secondaryNavigation &&
-                              "text-white hover:text-green-600"
+                              "text-muted-foreground hover:text-slate-600"
                           )}
                         >
                           {`${user.emailAddresses[0].emailAddress}`}
                         </p>
                         <button
                           className={cn(
-                            " flex items-center space-x-2 hover:text-white hover:bg-green-500 transition-colors duration-300 p-1 rounded-full text-muted-foreground",
+                            " flex items-center space-x-2 hover:text-muted-foreground hover:bg-green-500 transition-colors duration-300 p-1 rounded-full text-muted-foreground",
                             secondaryNavigation && "text-white"
                           )}
                         >
@@ -207,7 +207,7 @@ export const NavigationBar: FC = () => {
                             alt="usr"
                             width={500}
                             height={500}
-                            className=" max-w-8 max-h-8 aspect-square rounded-full border bg-slate-200"
+                            className=" max-w-8 max-h-8 aspect-square rounded-full border bg-blue-400"
                           ></Image>
                           <ChevronDown className=" h-4 w-4 relative right-1" />
                         </button>

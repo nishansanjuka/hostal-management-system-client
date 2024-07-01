@@ -32,9 +32,9 @@ export const FilterSection = ({
   className?: string;
   defaultValues?: HostelFilters;
 }) => {
-  const [variant, setVariant] = useState<Variant | null>(null);
-  const [gendar, setGendar] = useState<GenderType | null>(null);
-  const [year, setYear] = useState<Year | null>(null);
+  const [variant, setVariant] = useState<Variant | undefined>(undefined);
+  const [gendar, setGendar] = useState<GenderType | undefined>(undefined);
+  const [year, setYear] = useState<Year | undefined>(undefined);
   const [load, setLoad] = useState(false);
 
   const router = useRouter();
@@ -52,7 +52,7 @@ export const FilterSection = ({
   const handleFilter = async () => {
     setLoad(true);
     setIsLoading(true);
-    if (variant && gendar && year) {
+    if (variant || gendar || year) {
       setAllHostels(await filterHostels({ gendar, year, variant }));
       if (redirect)
         router.push(
@@ -136,7 +136,7 @@ export const FilterSection = ({
         </SelectContent>
       </Select>
       <Button
-        disabled={!variant || !gendar || !year || load}
+        // disabled={!variant || !gendar || !year || load}
         onClick={handleFilter}
         className="hover:bg-green-700 transition-colors duration-300 disabled:bg-green-700 text-white  rounded-full bg-green-700 hover:text-white"
         size={"icon"}

@@ -59,9 +59,9 @@ export async function filterHostels({
   gendar,
   year,
 }: {
-  variant: Variant;
-  gendar: GenderType;
-  year: Year;
+  variant: Variant | undefined;
+  gendar: GenderType | undefined;
+  year: Year | undefined;
 }): Promise<ExtHostel[]> {
   const user = currentUser();
   if (!user) {
