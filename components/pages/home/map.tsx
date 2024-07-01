@@ -174,11 +174,12 @@ export const MapDrawer: FC = () => {
     <section ref={mapContainer} className=" w-full h-full mt-20 ">
       <header className=" w-full h-fit flex flex-col mb-10 space-y-1 justify-center items-center">
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
-          Sample Text
+        Find us on google
         </h1>
-        <p className=" text-center px-4 text-muted-foreground text-xs font-semibold">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.
+        <p className=" text-muted-foreground text-xs font-semibold">
+          compare hostels with one click
+          We compare all hostel facilities for you
+          find your home
         </p>
       </header>
 
