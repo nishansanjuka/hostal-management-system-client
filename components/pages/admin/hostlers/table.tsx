@@ -1,9 +1,25 @@
-import { FC } from "react";
+"use client";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useHostlers } from "@/hooks/client/hostlers";
+import { getAllStudents } from "@/lib/actions/hostlers";
+import { cn } from "@/lib/utils";
+import { FC, useEffect, useState } from "react";
 
 export const Hsotlers: FC = () => {
+  const { hostlers, setAllHostlers } = useHostlers();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function setHostlers() {
+      setLoading(true);
+      setAllHostlers(await getAllStudents());
+      setLoading(false);
+    }
+    setHostlers();
+  }, []);
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle">
@@ -14,25 +30,25 @@ export const Hsotlers: FC = () => {
                     scope="col"
                     className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
                   >
-                    Name
+                    Student Id
                   </th>
                   <th
                     scope="col"
                     className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell"
                   >
-                    Title
+                    Email
                   </th>
                   <th
                     scope="col"
-                    className="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"
+                    className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"
                   >
-                    Email
+                    Hostel Name
                   </th>
                   <th
                     scope="col"
                     className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter"
                   >
-                    Role
+                    Year
                   </th>
                   <th
                     scope="col"
@@ -42,67 +58,81 @@ export const Hsotlers: FC = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {/* {people.map((person, personIdx) => (
-                  <tr key={person.email}>
-                    <td
-                      className={classNames(
-                        personIdx !== people.length - 1
-                          ? "border-b border-gray-200"
-                          : "",
-                        "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
-                      )}
-                    >
-                      {person.name}
-                    </td>
-                    <td
-                      className={classNames(
-                        personIdx !== people.length - 1
-                          ? "border-b border-gray-200"
-                          : "",
-                        "whitespace-nowrap hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"
-                      )}
-                    >
-                      {person.title}
-                    </td>
-                    <td
-                      className={classNames(
-                        personIdx !== people.length - 1
-                          ? "border-b border-gray-200"
-                          : "",
-                        "whitespace-nowrap hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"
-                      )}
-                    >
-                      {person.email}
-                    </td>
-                    <td
-                      className={classNames(
-                        personIdx !== people.length - 1
-                          ? "border-b border-gray-200"
-                          : "",
-                        "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                      )}
-                    >
-                      {person.role}
-                    </td>
-                    <td
-                      className={classNames(
-                        personIdx !== people.length - 1
-                          ? "border-b border-gray-200"
-                          : "",
-                        "relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8"
-                      )}
-                    >
-                      <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
+              {loading && (
+                <tbody>
+                  {Array.from({ length: 8 }).map((skeleton) => (
+                    <tr key={`hostler-${skeleton}`}>
+                      <td
+                        className={cn(
+                          "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                        )}
                       >
-                        Edit<span className="sr-only">, {person.name}</span>
-                      </a>
-                    </td>
-                  </tr>
-                ))} */}
-              </tbody>
+                        <Skeleton className=" w-full h-6 " />
+                      </td>
+                      <td
+                        className={cn(
+                          "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                        )}
+                      >
+                        <Skeleton className=" w-full h-6 " />
+                      </td>
+                      <td
+                        className={cn(
+                          "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                        )}
+                      >
+                        <Skeleton className=" w-full h-6 " />
+                      </td>
+                      <td
+                        className={cn(
+                          "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                        )}
+                      >
+                        <Skeleton className=" w-full h-6 " />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
+
+              {!loading && (
+                <tbody>
+                  {hostlers &&
+                    hostlers.map((hostler, index) => (
+                      <tr key={`hostler-${index}`}>
+                        <td
+                          className={cn(
+                            "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          )}
+                        >
+                          {hostler.user?.username}
+                        </td>
+                        <td
+                          className={cn(
+                            "whitespace-nowrap hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"
+                          )}
+                        >
+                          {hostler.user?.email}
+                        </td>
+                        <td
+                          className={cn(
+                            "whitespace-nowrap hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"
+                          )}
+                        >
+                          {hostler.user?.student.room?.hostel.name}
+                        </td>
+                        <td
+                          className={cn(
+                            "whitespace-nowrap hidden px-3 py-4 text-sm text-gray-500 sm:table-cell capitalize"
+                          )}
+                        >
+                          {hostler.user?.student.room?.hostel &&
+                            `${hostler.user?.student.room.hostel.year.toLocaleLowerCase()} Year`}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              )}
             </table>
           </div>
         </div>

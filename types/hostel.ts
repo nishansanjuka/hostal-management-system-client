@@ -1,3 +1,5 @@
+import { Variant } from "@prisma/client";
+
 export interface HostelBody {
   name: string;
   genderType: string;
@@ -5,4 +7,5 @@ export interface HostelBody {
   location: string | undefined;
   year: string;
   rooms: [];
+  variant : Variant
 }

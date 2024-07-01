@@ -14,7 +14,7 @@ export const FeedBackSection: FC = () => {
         </p>
       </header>
 
-      <section className=" lg:max-w-[70%] mx-auto flex justify-center">
+      <section className=" max-w-[90vw] lg:max-w-[70%] mx-auto flex justify-center">
         <FeedBackCard />
       </section>
     </section>

@@ -5,6 +5,8 @@ import React, { createContext, ReactNode } from "react";
 
 interface HostelContextType {
   hostels: ExtHostel[];
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
   getHostels: () => ExtHostel[];
   addHostel: (newEvent: ExtHostel) => void;
   setAllHostels: (newhostel: ExtHostel[]) => void;
@@ -18,6 +20,8 @@ export const HostelContext = createContext<HostelContextType | undefined>(
 
 export const HostelsProvider = ({ children }: { children: ReactNode }) => {
   const {
+    isLoading,
+    setIsLoading,
     hostels,
     getHostels,
     setAllHostels,
@@ -30,6 +34,8 @@ export const HostelsProvider = ({ children }: { children: ReactNode }) => {
     <HostelContext.Provider
       value={{
         hostels,
+        isLoading,
+        setIsLoading,
         getHostels,
         setAllHostels,
         updateHostelById,

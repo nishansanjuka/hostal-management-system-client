@@ -131,7 +131,7 @@ export const Container: FC<PropsWithChildren> = ({ children }) => {
                       onClick={() => signOut({ redirectUrl: "/" })}
                       className=" flex items-center space-x-2  hover:text-red-500 text-muted-foreground w-full p-[0.5] rounded-sm transition-colors duration-200"
                     >
-                      <LogOut className=" h-4 w-4 mr-1" /> Sign Out
+                      <LogOut className=" h-4 w-4 mr-1" /> Log out
                     </button>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>

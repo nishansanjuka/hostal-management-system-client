@@ -52,51 +52,52 @@ export const MapDrawer: FC = () => {
       target: "map",
     });
 
-    hostels.map((hostel) => {
-      if (hostel.location) {
-        const { cords } = JSON.parse(atob(hostel.location)) as {
-          location: string;
-          cords: number[];
-        };
+    hostels.length > 0 &&
+      hostels.map((hostel) => {
+        if (hostel.location) {
+          const { cords } = JSON.parse(atob(hostel.location)) as {
+            location: string;
+            cords: number[];
+          };
 
-        if (cords) {
-          const pitLamp = new VectorLayer({
-            source: new VectorSource({
-              features: [
-                new Feature({
-                  id: hostel.id,
-                  name: hostel.name,
-                  geometry: new Point(cords),
-                }),
-              ],
-            }),
-            style: new Style({
-              image: new Icon({
-                src: "/assets/hostal.png",
-                scale: 0.3,
+          if (cords) {
+            const pitLamp = new VectorLayer({
+              source: new VectorSource({
+                features: [
+                  new Feature({
+                    id: hostel.id,
+                    name: hostel.name,
+                    geometry: new Point(cords),
+                  }),
+                ],
               }),
-              text: new Text({
-                text: hostel.name,
-                font: "12px inter",
-                textAlign: "center",
-                scale: 0.8,
-                fill: new Fill({
-                  color: "white",
+              style: new Style({
+                image: new Icon({
+                  src: "/assets/hostal.png",
+                  scale: 0.3,
                 }),
-                backgroundFill: new Fill({
-                  color: "green",
+                text: new Text({
+                  text: hostel.name,
+                  font: "12px inter",
+                  textAlign: "center",
+                  scale: 0.8,
+                  fill: new Fill({
+                    color: "white",
+                  }),
+                  backgroundFill: new Fill({
+                    color: "green",
+                  }),
+                  padding: [5, 5, 5, 5],
+                  offsetX: 0,
+                  offsetY: 30,
                 }),
-                padding: [5, 5, 5, 5],
-                offsetX: 0,
-                offsetY: 30,
               }),
-            }),
-          });
+            });
 
-          map.addLayer(pitLamp);
+            map.addLayer(pitLamp);
+          }
         }
-      }
-    });
+      });
 
     function arrangeMap() {
       if (mapContainer.current) {
@@ -179,7 +180,6 @@ export const MapDrawer: FC = () => {
           compare hostels with one click
           We compare all hostel facilities for you
           find your home
-
         </p>
       </header>
 
@@ -200,8 +200,13 @@ export const MapDrawer: FC = () => {
                     </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
-                    <Button variant={'ghost'} className=" bg-green-700 text-white hover:bg-green-600 hover:text-white">
-                      <Link href={"#"}>
+                    <Button
+                      variant={"ghost"}
+                      className=" bg-green-700 text-white hover:bg-green-600 hover:text-white"
+                    >
+                      <Link
+                        href={`/hostels?variant=${selectedHostel.variant}&gendar=${selectedHostel.genderType}&year=${selectedHostel.year}`}
+                      >
                         Go checkout this hostel details here
                       </Link>
                     </Button>

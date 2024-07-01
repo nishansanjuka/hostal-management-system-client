@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { HostelBody } from "@/types";
-import { GenderType, Hostel, Year } from "@prisma/client";
+import { GenderType, Variant, Year } from "@prisma/client";
 import { FC, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { MapDrawer } from "./ui/map";
@@ -51,6 +51,7 @@ export const NavHeader: FC = () => {
     genderType,
     year,
     location,
+    variant,
   }) => {
     setLoad(true);
     const body: HostelBody = {
@@ -64,6 +65,7 @@ export const NavHeader: FC = () => {
           cords: locationCoordinates ? locationCoordinates : null,
         })
       ),
+      variant: variant,
       rooms: [],
     };
 
@@ -78,6 +80,9 @@ export const NavHeader: FC = () => {
 
   const handleYear = (value: string) => {
     setValue("year", value as Year);
+  };
+  const handleVariant = (value: string) => {
+    setValue("variant", value as Variant);
   };
   const handlegenderType = (value: string) => {
     setValue("genderType", value as GenderType);
@@ -131,18 +136,47 @@ export const NavHeader: FC = () => {
                   placeholder="Approximately distance from university in km"
                 />
               </div>
-              <Input
-                type="text"
-                step={0.01}
-                {...register("location", {
-                  required: "address is required!",
-                })}
-                className={cn(
-                  " w-full focus-visible:ring-transparent text-xs",
-                  errors.distance && " border-red-500"
-                )}
-                placeholder="Address or lane name"
-              />
+              <div className=" space-x-2 flex items-center">
+                <Input
+                  type="text"
+                  step={0.01}
+                  {...register("location", {
+                    required: "address is required!",
+                  })}
+                  className={cn(
+                    " w-full focus-visible:ring-transparent text-xs",
+                    errors.distance && " border-red-500"
+                  )}
+                  placeholder="Address or lane name"
+                />
+                <Select
+                  onValueChange={handleVariant}
+                  {...register("variant", { required: "Variant is required" })}
+                >
+                  <SelectTrigger
+                    className={cn(
+                      " w-full capitalize text-xs",
+                      errors.variant && " border-red-500"
+                    )}
+                  >
+                    <SelectValue placeholder="Choose Variant" className="" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel className=" text-xs">Variant</SelectLabel>
+                      {Object.values(Variant).map((variant, index) => (
+                        <SelectItem
+                          key={`variant-${index}`}
+                          value={variant}
+                          className=" capitalize text-xs "
+                        >
+                          {variant.toLocaleLowerCase()}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
               <div className=" space-x-2 flex items-center">
                 <Select
                   onValueChange={handleYear}

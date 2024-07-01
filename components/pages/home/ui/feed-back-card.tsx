@@ -5,7 +5,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { FeedBack } from "@/types";
 import Image from "next/image";
 import { FC } from "react";
 import feedBack01 from "@/public/assets/feedback1.png";
