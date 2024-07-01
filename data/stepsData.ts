@@ -3,32 +3,26 @@ import { Step } from "@/types";
 export const steps: Step[] = [
   {
     step: ".01",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.`,
+    description: `To get started, click the login button.`,
   },
   {
     step: ".02",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.`,
+    description: `Provide the password and username.`,
   },
   {
     step: ".03",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.`,
+    description: `Determine your opinion by applying to hostels or swapping them.`,
   },
   {
     step: ".04",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.`,
+    description: `To switch hostels, click to the account settings.`,
   },
   {
     step: ".05",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.`,
+    description: `Select the "Swapping" option to exchange hostels.`,
   },
   {
     step: ".06",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.`,
+    description: `Select the "Apply" button to apply hostal.`,
   },
 ];

@@ -7,11 +7,10 @@ export const FeedBackSection: FC = () => {
     <section className="w-full h-full min-h-fit mt-40">
       <header className=" w-full h-fit flex flex-col mb-10 space-y-1 justify-center items-center">
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
-          Sample Text
+          Testamonials
         </h1>
         <p className=" text-muted-foreground text-xs font-semibold">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
-          incidunt.
+        Get some idea about our service.
         </p>
       </header>
 
