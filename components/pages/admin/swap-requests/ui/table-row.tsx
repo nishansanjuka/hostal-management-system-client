@@ -5,6 +5,7 @@ import {
   RejectExchangeRequest,
 } from "@/lib/actions/exchange-operations";
 import { ExtStudent, getStudentById } from "@/lib/actions/hostlers";
+import { cn } from "@/lib/utils";
 import { ExchangeRequest } from "@prisma/client";
 import { Loader } from "lucide-react";
 import { FC, useEffect, useState } from "react";
@@ -19,6 +20,8 @@ export const Row: FC<{
   const [request, setRequest] = useState<ExchangeRequest | null>(null);
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [deleted, setDeleted] = useState(false);
+  const [Approved, setApproved] = useState(false);
 
   useEffect(() => {
     async function getStudent() {
@@ -38,11 +41,9 @@ export const Row: FC<{
         toStudent,
         requestId: requestId,
       });
-
-      if (res.status == "ACCEPTED") {
-        window.location.reload();
-        setRequest(res);
-      }
+      setRequest(res);
+      setApproved(true);
+      // window.location.reload();
     }
     setLoading(false);
   };
@@ -50,15 +51,18 @@ export const Row: FC<{
   const handleReject = async () => {
     setDeleting(true);
     const res = await RejectExchangeRequest({ requestId });
-    if (res) {
-      setRequest(res);
-      window.location.reload();
-    }
+    setDeleted(true);
+    // window.location.reload();
     setDeleting(false);
   };
 
   return (
-    <tr className="divide-x divide-gray-200">
+    <tr
+      className={cn(
+        "divide-x divide-gray-200",
+        deleted || (Approved && "hidden")
+      )}
+    >
       <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">
         {fromStudent ? (
           fromStudent.user.username

@@ -176,7 +176,7 @@ export const MapDrawer: FC = () => {
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
         Find us on google
         </h1>
-        <p className=" text-muted-foreground text-xs font-semibold">
+        <p className=" text-muted-foreground text-xs md:text-base font-semibold">
           compare hostels with one click
           We compare all hostel facilities for you
           find your home

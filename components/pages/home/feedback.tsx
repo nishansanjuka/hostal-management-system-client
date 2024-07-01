@@ -9,7 +9,7 @@ export const FeedBackSection: FC = () => {
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Testamonials
         </h1>
-        <p className=" text-muted-foreground text-xs font-semibold">
+        <p className=" text-muted-foreground text-xs md:text-base font-semibold">
         Get some idea about our service.
         </p>
       </header>

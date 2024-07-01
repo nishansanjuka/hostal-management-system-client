@@ -21,6 +21,7 @@ export const Hostels: FC = () => {
   const { setAllHostels, hostels } = useHostels();
   const [load, setLoad] = useState(false);
   const [deleted, setdeleted] = useState(false);
+  const hostel = useHostels();
 
   useEffect(() => {
     async function getHostels() {
@@ -37,6 +38,7 @@ export const Hostels: FC = () => {
 
   const handleDelete = async (id: number) => {
     setdeleted(await deleteHostelById({ id }));
+    hostel.deleteHostelById(id);
   };
 
   return (

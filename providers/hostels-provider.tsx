@@ -12,6 +12,7 @@ interface HostelContextType {
   setAllHostels: (newhostel: ExtHostel[]) => void;
   updateHostelById: (id: number, updatedData: Partial<ExtHostel>) => void;
   addRoomToHostel: (room: Room) => void;
+  deleteHostelById: (id: number) => void;
 }
 
 export const HostelContext = createContext<HostelContextType | undefined>(
@@ -28,6 +29,7 @@ export const HostelsProvider = ({ children }: { children: ReactNode }) => {
     updateHostelById,
     addHostel,
     addRoomToHostel,
+    deleteHostelById,
   } = HostelsContext();
 
   return (
@@ -41,6 +43,7 @@ export const HostelsProvider = ({ children }: { children: ReactNode }) => {
         updateHostelById,
         addHostel,
         addRoomToHostel,
+        deleteHostelById,
       }}
     >
       {children}

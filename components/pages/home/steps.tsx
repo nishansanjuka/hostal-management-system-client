@@ -43,7 +43,7 @@ export const StepsSection: FC = () => {
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Steps of Work
         </h1>
-        <p className=" text-muted-foreground text-xs font-semibold">
+        <p className=" text-muted-foreground text-xs md:text-base font-semibold">
         How to utilize the HostelMate system as a new user. 
         </p>
       </header>

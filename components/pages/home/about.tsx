@@ -7,7 +7,7 @@ export const AboutSection: FC = () => {
         <h1 className=" text-green-600 text-4xl xl:text-6xl font-bold">
           Best hostels guides..
         </h1>
-        <p className=" text-muted-foreground text-xs font-semibold">
+        <p className=" text-muted-foreground text-xs sm:text-base font-semibold">
           {`Here's our tips and Tricks `}
         </p>
       </header>

@@ -7,7 +7,6 @@ import { useContext, useEffect, useState } from "react";
 export interface ExtStudent extends Student {
   exchangeRequestsFromUser: ExchangeRequest[];
   exchangeRequestsToUser: ExchangeRequest[];
-  
 }
 
 export interface ExtRoom extends Room {
@@ -42,7 +41,6 @@ export const HostelsContext = () => {
 
   const addHostel = (newHostel: ExtHostel) => {
     setIsLoading(true);
-
     if (hostels.length > 0) {
       setHostels((prevHostels) => [...prevHostels, newHostel]);
     } else {
@@ -59,6 +57,14 @@ export const HostelsContext = () => {
           ? { ...hostel, rooms: [...hostel.rooms, newRoom] }
           : hostel
       )
+    );
+    setIsLoading(false);
+  };
+
+  const deleteHostelById = (id: number) => {
+    setIsLoading(true);
+    setHostels((prevHostels) =>
+      prevHostels.filter((hostel) => hostel.id !== id)
     );
     setIsLoading(false);
   };
@@ -84,6 +90,7 @@ export const HostelsContext = () => {
     setAllHostels,
     updateHostelById,
     addRoomToHostel,
+    deleteHostelById,
   };
 };
 
