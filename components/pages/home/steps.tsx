@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { steps } from "@/data";
 import { cn } from "@/lib/utils";
 import { Step } from "@/types";
+import Link from "next/link";
 import { FC, useEffect, useRef } from "react";
 
 export const StepsSection: FC = () => {
@@ -71,7 +72,7 @@ export const StepsSection: FC = () => {
         </p>
 
         <Button className=" bg-green-200 text-green-700 rounded-full font-extrabold hover:bg-green-600 hover:text-white">
-          Apply Now
+          <Link href={'/hostels'}>Apply Now</Link>
         </Button>
       </div>
     </section>

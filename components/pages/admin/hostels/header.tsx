@@ -103,7 +103,7 @@ export const NavHeader: FC = () => {
           <DialogTrigger asChild>
             <Button>New Hostel</Button>
           </DialogTrigger>
-          <DialogContent className="xl:max-w-[50%] sm:max-w-[90%]">
+          <DialogContent className="xl:max-w-fit sm:max-w-[90%]">
             <DialogHeader>
               <DialogTitle>Add New Hostel</DialogTitle>
               <DialogDescription>

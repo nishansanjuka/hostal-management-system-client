@@ -5,11 +5,13 @@ import logoLight from "@/public/assets/logo-light.svg";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { useHostels } from "@/hooks/client/hostels";
+import { useUser } from "@clerk/nextjs";
 
 export const FooterSection: FC = () => {
   const pathName = usePathname();
   const [scrollTop, setScrollTop] = useState<boolean>(false);
   const { isLoading } = useHostels();
+  const { isLoaded } = useUser();
   useMemo(() => setScrollTop(isLoading), [isLoading]);
 
   useEffect(() => {
@@ -26,11 +28,13 @@ export const FooterSection: FC = () => {
   return (
     <footer
       className={cn(
-        "w-full select-none h-fit mt-20 bg-green-700 rounded-t-[60px] p-10 text-xs text-white",
+        !isLoaded
+          ? "hidden"
+          : "w-full select-none h-fit mt-20 bg-green-700 rounded-t-[60px] p-10 text-xs text-white",
         ["/sign-in", "/hostels", "/swap-hostels", "/me"].includes(pathName) ||
           pathName.startsWith("/admin")
           ? "hidden"
-          : "block",
+          : "block"
         // pathName.startsWith("/hostels") && !scrollTop && "absolute bottom-0",
         // pathName.startsWith("/swap-hostels") &&
         //   !scrollTop &&
