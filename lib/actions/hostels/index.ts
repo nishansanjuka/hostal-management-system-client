@@ -200,3 +200,24 @@ export async function connectUserToRoom(studentId: string, roomId: number) {
     await prisma.$disconnect();
   }
 }
+
+export async function deleteHostelById({
+  id,
+}: {
+  id: number;
+}): Promise<boolean> {
+  const user = currentUser();
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/hostels/${id}`, {
+      method: "DELETE",
+    });
+
+    return res.ok;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

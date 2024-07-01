@@ -40,6 +40,7 @@ export const Row: FC<{
       });
 
       if (res.status == "ACCEPTED") {
+        window.location.reload();
         setRequest(res);
       }
     }
@@ -51,6 +52,7 @@ export const Row: FC<{
     const res = await RejectExchangeRequest({ requestId });
     if (res) {
       setRequest(res);
+      window.location.reload();
     }
     setDeleting(false);
   };

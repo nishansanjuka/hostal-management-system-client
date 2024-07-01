@@ -11,14 +11,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useHostels } from "@/hooks/client/hostels";
-import { getAllHostels } from "@/lib/actions/hostels";
+import { deleteHostelById, getAllHostels } from "@/lib/actions/hostels";
 import { Edit, EllipsisVertical, Plus, Trash } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import { AddRoom } from "./ui/add-room-form";
+import { cn } from "@/lib/utils";
 
 export const Hostels: FC = () => {
   const { setAllHostels, hostels } = useHostels();
   const [load, setLoad] = useState(false);
+  const [deleted, setdeleted] = useState(false);
 
   useEffect(() => {
     async function getHostels() {
@@ -32,6 +34,10 @@ export const Hostels: FC = () => {
     }
     getHostels();
   }, []);
+
+  const handleDelete = async (id: number) => {
+    setdeleted(await deleteHostelById({ id }));
+  };
 
   return (
     <div className="mt-8 flow-root px-5">
@@ -92,7 +98,7 @@ export const Hostels: FC = () => {
                   hostels.map((hostel, index) => (
                     <tr
                       key={`hostel-data${index}`}
-                      className="divide-x divide-gray-200"
+                      className={cn("divide-x divide-gray-200")}
                     >
                       <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">
                         {hostel.name}
@@ -156,6 +162,7 @@ export const Hostels: FC = () => {
                               </DropdownMenuItem>
                               <DropdownMenuItem className=" h-fit p-0">
                                 <Button
+                                  onClick={() => handleDelete(hostel.id)}
                                   variant={"ghost"}
                                   className=" hover:text-red-700 hover:bg-red-100 text-xs w-full flex justify-start"
                                 >
